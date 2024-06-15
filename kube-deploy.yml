@@ -23,11 +23,12 @@ kind: Service
 metadata:
   name: php-app-service
 spec:
+  type: NodePort
   selector:
     app: php-app
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: LoadBalancer
+
 
