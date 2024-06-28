@@ -1,19 +1,12 @@
 pipeline {
   agent any
 
-  environment {
-    DOCKER_CREDS = credentials('docker-cred')
-  }
-
   stages {
     stage('Run Docker Compose') {
       steps {
         script {
           try {
-            sh """
-              #!/bin/bash
-              echo ${DOCKER_CREDS_PSW} | sudo -S /usr/bin/docker-compose up -d
-            """
+            sh '#!/bin/bash\nsudo docker-compose up -d'
           } catch (Exception err) {
             echo "Error during Docker Compose execution: ${err}"
             currentBuild.result = 'FAILURE'
